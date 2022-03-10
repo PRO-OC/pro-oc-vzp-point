@@ -1,6 +1,8 @@
 # PRO OC VZP Point
 
 ![Preview](preview/nahled.png)
+![Preview](preview/nebylo_mozne_overit.png)
+![Preview](preview/pojisteni_nenalezeno.png)
 
 [Rozšíření do Mozilla Firefox](https://addons.mozilla.org/addon/pro-oc-vzp-point)
 

@@ -105,8 +105,8 @@ function OvereniPlatnostiPojisteni(jmeno, prijmeni, datumNarozeni, onSuccess, on
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg.text === 'OvereniPlatnostiPojisteni' && msg.data.Jmeno && msg.data.Prijmeni && msg.data.DatumNarozeni) {
-        OvereniPlatnostiPojisteni(msg.data.Jmeno, msg.data.Prijmeni, msg.data.DatumNarozeni, function(responsePrubehPojisteniDruhB2B) {
-            sendResponse(responsePrubehPojisteniDruhB2B);
+        OvereniPlatnostiPojisteni(msg.data.Jmeno, msg.data.Prijmeni, msg.data.DatumNarozeni, function(responseOvereniPlatnostiPojisteni) {
+            sendResponse(responseOvereniPlatnostiPojisteni);
         }, function() {
             sendResponse(false);
         });

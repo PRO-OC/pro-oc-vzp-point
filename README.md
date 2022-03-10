@@ -12,7 +12,7 @@ Osobní informace pacientů podmíněné přihlášením do modulu [Pacienti COV
 
 ## Použití
 
-Aktuálně (k 10.3.2022) se nelze k Centrálnímu registru pojištěnců ČR spravovaného [VZP](https://www.vzp.cz) dotazovat podle jména, přijmení a datumu narození jinak než manuálně v [VZP Point](https://www.vzp.cz/e-vzp/vzp-point). Pro využití tohoto rozšíření je za potřebí zadat do nastavení vlastní proxy server, který dotaz zproztředkuje, např. [PRO OC VZP Point Proxy](https://github.com/PRO-OC/pro-oc-vzp-point-proxy). Defaultně se body požadavků šifrují pomocí AES knihovny [crypto-js](https://github.com/brix/crypto-js). Toto šifrování lze vypnout v nastavení.
+Aktuálně (k 10.3.2022) se nelze k Centrálnímu registru pojištěnců ČR spravovaného [VZP](https://www.vzp.cz) dotazovat podle jména, přijmení a datumu narození jinak než manuálně ve [VZP Point](https://www.vzp.cz/e-vzp/vzp-point). Pro využití tohoto rozšíření je zapotřebí zadat do nastavení vlastní proxy server, který dotaz zproztředkuje, např. [PRO OC VZP Point Proxy](https://github.com/PRO-OC/pro-oc-vzp-point-proxy). Defaultně se body požadavků šifrují pomocí AES knihovny [crypto-js](https://github.com/brix/crypto-js). Toto šifrování lze vypnout v nastavení.
 
 ## Změny pro Mozilla Firefox
 

@@ -16,6 +16,19 @@ function getVysledekKontrolyZdravotniPojistovnaTextElement(id, text) {
     return VysledekKontrolyZdravotniPojistovnaTextElement;
 }
 
+function getDateDDdotMMdotYYYY(date) {
+    var day = date.substr(0, date.indexOf('.'));
+    var month = date.substr(date.indexOf('.') + 1, date.lastIndexOf('.') - date.indexOf('.') - 1) - 1;
+    var year = date.substr(date.lastIndexOf('.') + 1, date.length + 1);
+    var dateObj = new Date(year, month, day);
+  
+    if (isNaN(dateObj.getTime())) {
+      dateObj = new Date(date);
+    }
+    
+    return dateObj.getDate() + "." + (dateObj.getMonth() + 1) + "." + dateObj.getFullYear();
+}
+
 function VysledekKontrolyZdravotniPojistovnaText() {
 
     const VysledekKontrolyZdravotniPojistovnaElementId = "VysledekKontrolyZdravotniPojistovnaVZPPoint";
@@ -56,7 +69,7 @@ function VysledekKontrolyZdravotniPojistovnaText() {
         const VysledekNextElement = ZdravotniPojistovnaKod ? ZdravotniPojistovnaKod : Pacient_CisloPojistenceLabelElement.nextElementSibling;
         const Jmeno = DetailPacientJmeno ? DetailPacientJmeno : (TestovanyJmenoElement ? TestovanyJmenoElement.value : null);
         const Prijmeni = DetailPacientPrijmeni ? DetailPacientPrijmeni : (TestovanyPrijmeniElement ? TestovanyPrijmeniElement.value : null);
-        const DatumNarozeni = DetailDatumNarozeni ? DetailDatumNarozeni : (TestovanyDatumNarozeniElement ? TestovanyDatumNarozeniElement.value : null);
+        const DatumNarozeni = DetailDatumNarozeni ? getDateDDdotMMdotYYYY(DetailDatumNarozeni) : (TestovanyDatumNarozeniElement ? TestovanyDatumNarozeniElement.value : null);
 
         chrome.runtime.sendMessage({
             "text": "OvereniPlatnostiPojisteni",

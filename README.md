@@ -1,11 +1,11 @@
 # PRO OC VZP Point
 
+[Rozšíření do Mozilla Firefox](https://addons.mozilla.org/addon/pro-oc-vzp-point)
+
 ![Preview](preview/nahled.png)
 
 ![Preview](preview/nebylo_mozne_overit.png)
 ![Preview](preview/pojisteni_nenalezeno.png)
-
-[Rozšíření do Mozilla Firefox](https://addons.mozilla.org/addon/pro-oc-vzp-point)
 
 Rozšíření přidává užitečné funkce za pomoci [VZP Point](https://www.vzp.cz/e-vzp/vzp-point) do modulu [Pacienti COVID-19](https://ereg.ksrzis.cz/Registr/CUDZadanky/VyhledaniPacienta) a [Žádanky testů COVID-19](https://eregpublicsecure.ksrzis.cz/Registr/CUD/Overeni) s cílem usnadnit práci s těmito systémy.
 

@@ -34,6 +34,8 @@ function VysledekKontrolyZdravotniPojistovnaText() {
     const VysledekKontrolyZdravotniPojistovnaElementId = "VysledekKontrolyZdravotniPojistovnaVZPPoint";
 
     // Vystavení žádanky
+    const ZdravotniPojistovnaKodElement = document.getElementById("ZdravotniPojistovnaKod");
+    const TestovanyNarodnostElement = document.getElementById("TestovanyNarodnost");
     const TestovanyJmenoElement = document.getElementById("TestovanyJmeno");
     const TestovanyPrijmeniElement = document.getElementById("TestovanyPrijmeni");
     const TestovanyDatumNarozeniElement = document.getElementById("TestovanyDatumNarozeni");
@@ -62,14 +64,29 @@ function VysledekKontrolyZdravotniPojistovnaText() {
     }
 
     if(
-        (TestovanyCisloPojistence && TestovanyJmenoElement.value && TestovanyPrijmeniElement.value && TestovanyDatumNarozeniElement.value) || 
-        (Pacient_CisloPojistenceLabelElement && DetailPacientJmeno && DetailPacientPrijmeni && DetailDatumNarozeni)
+        (
+            ZdravotniPojistovnaKodElement && 
+            (
+                ZdravotniPojistovnaKod.value == "111" ||
+                ZdravotniPojistovnaKod.value == "201" ||
+                ZdravotniPojistovnaKod.value == "205" ||
+                ZdravotniPojistovnaKod.value == "207" ||
+                ZdravotniPojistovnaKod.value == "209" ||
+                ZdravotniPojistovnaKod.value == "211" ||
+                ZdravotniPojistovnaKod.value == "213"
+            ) &&
+            (TestovanyJmenoElement.value && TestovanyPrijmeniElement.value && TestovanyDatumNarozeniElement.value) &&
+            TestovanyNarodnostElement && TestovanyNarodnostElement.value != "CZ" 
+        ) ||
+        (
+            Pacient_CisloPojistenceLabelElement && DetailPacientJmeno && DetailPacientPrijmeni && DetailDatumNarozeni
+        )
     ) {
         const CisloPojistence = DetailPacientCisloPojistence ? DetailPacientCisloPojistence : (TestovanyCisloPojistence ? TestovanyCisloPojistence.value : null)
         const VysledekNextElement = ZdravotniPojistovnaKod ? ZdravotniPojistovnaKod : Pacient_CisloPojistenceLabelElement.nextElementSibling;
         const Jmeno = DetailPacientJmeno ? DetailPacientJmeno : (TestovanyJmenoElement ? TestovanyJmenoElement.value : null);
         const Prijmeni = DetailPacientPrijmeni ? DetailPacientPrijmeni : (TestovanyPrijmeniElement ? TestovanyPrijmeniElement.value : null);
-        const DatumNarozeni = DetailDatumNarozeni ? getDateDDdotMMdotYYYY(DetailDatumNarozeni) : (TestovanyDatumNarozeniElement ? TestovanyDatumNarozeniElement.value : null);
+        const DatumNarozeni = DetailDatumNarozeni ? DetailDatumNarozeni : (TestovanyDatumNarozeniElement ? getDateDDdotMMdotYYYY(TestovanyDatumNarozeniElement.value) : null);
 
         chrome.runtime.sendMessage({
             "text": "OvereniPlatnostiPojisteni",

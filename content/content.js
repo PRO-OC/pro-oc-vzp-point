@@ -1,3 +1,43 @@
+const TestovanyNarodnostElement = document.getElementById("TestovanyNarodnost");
+
+if(TestovanyNarodnostElement) {
+    TestovanyNarodnostElement.addEventListener("change", () => {
+        VysledekKontrolyZdravotniPojistovnaText();
+    });
+}
+
+const ZdravotniPojistovnaKodElement = document.getElementById("ZdravotniPojistovnaKod");
+
+if(ZdravotniPojistovnaKodElement) {
+    ZdravotniPojistovnaKodElement.addEventListener("change", () => {
+        VysledekKontrolyZdravotniPojistovnaText();
+    });
+}
+
+const TestovanyJmenoElement = document.getElementById("TestovanyJmeno");
+
+if(TestovanyJmenoElement) {
+    TestovanyJmenoElement.addEventListener("change", () => {
+        VysledekKontrolyZdravotniPojistovnaText();
+    });
+}
+
+const TestovanyPrijmeniElement = document.getElementById("TestovanyPrijmeni");
+
+if(TestovanyPrijmeniElement) {
+    TestovanyPrijmeniElement.addEventListener("change", () => {
+        VysledekKontrolyZdravotniPojistovnaText();
+    });
+}
+
+const TestovanyDatumNarozeniElement = document.getElementById("TestovanyDatumNarozeni");
+
+if(TestovanyDatumNarozeniElement) {
+    TestovanyDatumNarozeniElement.addEventListener("change", () => {
+        VysledekKontrolyZdravotniPojistovnaText();
+    });
+}
+
 function getRegistrCUDOvereniUrl() {
     return "/Registr/CUD/Overeni";
 }
@@ -34,11 +74,6 @@ function VysledekKontrolyZdravotniPojistovnaText() {
     const VysledekKontrolyZdravotniPojistovnaElementId = "VysledekKontrolyZdravotniPojistovnaVZPPoint";
 
     // Vystavení žádanky
-    const ZdravotniPojistovnaKodElement = document.getElementById("ZdravotniPojistovnaKod");
-    const TestovanyNarodnostElement = document.getElementById("TestovanyNarodnost");
-    const TestovanyJmenoElement = document.getElementById("TestovanyJmeno");
-    const TestovanyPrijmeniElement = document.getElementById("TestovanyPrijmeni");
-    const TestovanyDatumNarozeniElement = document.getElementById("TestovanyDatumNarozeni");
     const TestovanyCisloPojistence = document.getElementById("TestovanyCisloPojistence");
 
     // Detail pacienta
@@ -151,39 +186,6 @@ function VysledekKontrolyZdravotniPojistovnaText() {
             VysledekKontrolyZdravotniPojistovnaText.style.display = "none";
         }
     }
-}
-
-const ZdravotniPojistovnaKod = document.getElementById("ZdravotniPojistovnaKod");
-
-if(ZdravotniPojistovnaKod) {
-    ZdravotniPojistovnaKod.addEventListener("change", () => {
-        VysledekKontrolyZdravotniPojistovnaText();
-    });
-}
-
-
-const TestovanyJmeno = document.getElementById("TestovanyJmeno");
-
-if(TestovanyJmeno) {
-    TestovanyJmeno.addEventListener("change", () => {
-        VysledekKontrolyZdravotniPojistovnaText();
-    });
-}
-
-const TestovanyPrijmeni = document.getElementById("TestovanyPrijmeni");
-
-if(TestovanyPrijmeni) {
-    TestovanyPrijmeni.addEventListener("change", () => {
-        VysledekKontrolyZdravotniPojistovnaText();
-    });
-}
-
-const TestovanyDatumNarozeni = document.getElementById("TestovanyDatumNarozeni");
-
-if(TestovanyDatumNarozeni) {
-    TestovanyDatumNarozeni.addEventListener("change", () => {
-        VysledekKontrolyZdravotniPojistovnaText();
-    });
 }
 
 VysledekKontrolyZdravotniPojistovnaText();

@@ -102,13 +102,13 @@ function VysledekKontrolyZdravotniPojistovnaText() {
         (
             ZdravotniPojistovnaKodElement && 
             (
-                ZdravotniPojistovnaKod.value == "111" ||
-                ZdravotniPojistovnaKod.value == "201" ||
-                ZdravotniPojistovnaKod.value == "205" ||
-                ZdravotniPojistovnaKod.value == "207" ||
-                ZdravotniPojistovnaKod.value == "209" ||
-                ZdravotniPojistovnaKod.value == "211" ||
-                ZdravotniPojistovnaKod.value == "213"
+                ZdravotniPojistovnaKodElement.value == "111" ||
+                ZdravotniPojistovnaKodElement.value == "201" ||
+                ZdravotniPojistovnaKodElement.value == "205" ||
+                ZdravotniPojistovnaKodElement.value == "207" ||
+                ZdravotniPojistovnaKodElement.value == "209" ||
+                ZdravotniPojistovnaKodElement.value == "211" ||
+                ZdravotniPojistovnaKodElement.value == "213"
             ) &&
             (TestovanyJmenoElement.value && TestovanyPrijmeniElement.value && TestovanyDatumNarozeniElement.value) &&
             TestovanyNarodnostElement && TestovanyNarodnostElement.value != "CZ" 
@@ -118,7 +118,7 @@ function VysledekKontrolyZdravotniPojistovnaText() {
         )
     ) {
         const CisloPojistence = DetailPacientCisloPojistence ? DetailPacientCisloPojistence : (TestovanyCisloPojistence ? TestovanyCisloPojistence.value : null)
-        const VysledekNextElement = ZdravotniPojistovnaKod ? ZdravotniPojistovnaKod : Pacient_CisloPojistenceLabelElement.nextElementSibling;
+        const VysledekNextElement = ZdravotniPojistovnaKodElement ? ZdravotniPojistovnaKodElement : Pacient_CisloPojistenceLabelElement.nextElementSibling;
         const Jmeno = DetailPacientJmeno ? DetailPacientJmeno : (TestovanyJmenoElement ? TestovanyJmenoElement.value : null);
         const Prijmeni = DetailPacientPrijmeni ? DetailPacientPrijmeni : (TestovanyPrijmeniElement ? TestovanyPrijmeniElement.value : null);
         const DatumNarozeni = DetailDatumNarozeni ? DetailDatumNarozeni : (TestovanyDatumNarozeniElement ? getDateDDdotMMdotYYYY(TestovanyDatumNarozeniElement.value) : null);
@@ -145,8 +145,8 @@ function VysledekKontrolyZdravotniPojistovnaText() {
 
                     const ZdravotniPojistovnaVysledekKod = VysledekKontroly.zdravotniPojistovna.split("-")[0].trim();
 
-                    if(ZdravotniPojistovnaKod && ZdravotniPojistovnaVysledekKod != ZdravotniPojistovnaKod.value) {
-                        const ZdravotniPojistovnaKodText = ZdravotniPojistovnaKod.value ? ZdravotniPojistovnaKod.value : " ";
+                    if(ZdravotniPojistovnaKodElement && ZdravotniPojistovnaVysledekKod != ZdravotniPojistovnaKodElement.value) {
+                        const ZdravotniPojistovnaKodText = ZdravotniPojistovnaKodElement.value ? ZdravotniPojistovnaKodElement.value : " ";
                         alert("Neshoduje se kód pojišťovny na žádance: '" + ZdravotniPojistovnaKodText + "' a kód pojištovny dohledaného podle jména, příjmení a datumu narození: '" + ZdravotniPojistovnaVysledekKod + "'");
                     }
 

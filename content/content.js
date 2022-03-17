@@ -51,7 +51,7 @@ function getVysledekKontrolyZdravotniPojistovnaTextElement(id, text) {
     } else {
         VysledekKontrolyZdravotniPojistovnaTextElement.style.display = "block";
     }
-    VysledekKontrolyZdravotniPojistovnaTextElement.innerHTML = text;
+    VysledekKontrolyZdravotniPojistovnaTextElement.innerHTML = DOMPurify.sanitize(text);
 
     return VysledekKontrolyZdravotniPojistovnaTextElement;
 }

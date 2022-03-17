@@ -29,3 +29,7 @@ Aktuálně (k 10.3.2022) se nelze k Centrálnímu registru pojištěnců ČR spr
 ## Pacienti COVID-19
 
 - Na detailu profilu provádí kontrolu pojištění podle jména, přijmení a datumu narození (důležité při slučování profilů)
+
+## Použité knihovny
+
+- [DOMPurify 2.3.6](https://github.com/cure53/DOMPurify/blob/2.3.6/dist/purify.min.js)

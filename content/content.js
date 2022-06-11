@@ -6,7 +6,7 @@ if(TestovanyNarodnostElement) {
     });
 }
 
-const ZdravotniPojistovnaKodElement = document.getElementById("ZdravotniPojistovnaKod");
+var ZdravotniPojistovnaKodElement = document.getElementById("ZdravotniPojistovnaKod");
 
 if(ZdravotniPojistovnaKodElement) {
     ZdravotniPojistovnaKodElement.addEventListener("change", () => {
@@ -42,12 +42,13 @@ function getRegistrCUDOvereniUrl() {
     return "/Registr/CUD/Overeni";
 }
 
-function getVysledekKontrolyZdravotniPojistovnaTextElement(id, text) {
+function getVysledekKontrolyZdravotniPojistovnaTextElement(id, text, useTd) {
     var VysledekKontrolyZdravotniPojistovnaTextElement = document.getElementById(id);
 
     if(!VysledekKontrolyZdravotniPojistovnaTextElement) {
-        VysledekKontrolyZdravotniPojistovnaTextElement = document.createElement("div");
+        VysledekKontrolyZdravotniPojistovnaTextElement = document.createElement(useTd ? "td" : "div");
         VysledekKontrolyZdravotniPojistovnaTextElement.setAttribute("class", "textField");
+        VysledekKontrolyZdravotniPojistovnaTextElement.setAttribute("style", "vertical-align: text-top;");
     } else {
         VysledekKontrolyZdravotniPojistovnaTextElement.style.display = "block";
     }
@@ -69,12 +70,19 @@ function getDateDDdotMMdotYYYY(date) {
     return dateObj.getDate() + "." + (dateObj.getMonth() + 1) + "." + dateObj.getFullYear();
 }
 
+var TestovanyCisloPojistenceElement = document.getElementById("TestovanyCisloPojistence");
+
 function VysledekKontrolyZdravotniPojistovnaText() {
 
     const VysledekKontrolyZdravotniPojistovnaElementId = "VysledekKontrolyZdravotniPojistovnaVZPPoint";
 
-    // Vystavení žádanky
-    const TestovanyCisloPojistence = document.getElementById("TestovanyCisloPojistence");
+    // Overeni zadanky
+    if(KodPojistovnyPrintDiv) {
+        ZdravotniPojistovnaKodElement = KodPojistovnyPrintDiv;
+    }
+    if(CisloPojistencePrintDiv) {
+        TestovanyCisloPojistenceElement = CisloPojistencePrintDiv;
+    }
 
     // Detail pacienta
     const Pacient_CisloPojistenceLabelElement = document.querySelector('label[for="Pacient_CisloPojistence"]');
@@ -98,30 +106,38 @@ function VysledekKontrolyZdravotniPojistovnaText() {
         DetailDatumNarozeni = Pacient_DatumNarozeniElement.nextElementSibling.innerText;
     }
 
+    const CisloPojistence = DetailPacientCisloPojistence ? DetailPacientCisloPojistence : (TestovanyCisloPojistenceElement && TestovanyCisloPojistenceElement.value ? TestovanyCisloPojistenceElement.value : CisloPojistencePrintDiv ? CisloPojistencePrintDiv.innerText : "");
+    const Jmeno = DetailPacientJmeno ? DetailPacientJmeno : (TestovanyJmenoElement && TestovanyJmenoElement.value ? TestovanyJmenoElement.value : JmenoPrintDiv ? JmenoPrintDiv.innerText : "");
+    const Prijmeni = DetailPacientPrijmeni ? DetailPacientPrijmeni : (TestovanyPrijmeniElement && TestovanyPrijmeniElement.value ? TestovanyPrijmeniElement.value : PrijmeniPrintDiv ? PrijmeniPrintDiv.innerText : "");
+    const DatumNarozeni = DetailDatumNarozeni ? DetailDatumNarozeni : (TestovanyDatumNarozeniElement && TestovanyDatumNarozeniElement.value ? TestovanyDatumNarozeniElement.value : DatumNarozeniPrintDiv ? DatumNarozeniPrintDiv.innerText : "");
+    const Narodnost = TestovanyNarodnostElement && TestovanyNarodnostElement.value ? TestovanyNarodnostElement.value : NarodnostPrintDiv ? NarodnostPrintDiv.innerText : "";
+
+    var ZdravotniPojistovnaKodValue = ZdravotniPojistovnaKodElement && ZdravotniPojistovnaKodElement.value ? ZdravotniPojistovnaKodElement.value : (ZdravotniPojistovnaKodElement && ZdravotniPojistovnaKodElement.innerText ? ZdravotniPojistovnaKodElement.innerText.split(" ")[0] : "");
+
     if(
         (
             ZdravotniPojistovnaKodElement && 
             (
-                ZdravotniPojistovnaKodElement.value == "111" ||
-                ZdravotniPojistovnaKodElement.value == "201" ||
-                ZdravotniPojistovnaKodElement.value == "205" ||
-                ZdravotniPojistovnaKodElement.value == "207" ||
-                ZdravotniPojistovnaKodElement.value == "209" ||
-                ZdravotniPojistovnaKodElement.value == "211" ||
-                ZdravotniPojistovnaKodElement.value == "213"
+                ZdravotniPojistovnaKodValue == "111" ||
+                ZdravotniPojistovnaKodValue == "201" ||
+                ZdravotniPojistovnaKodValue == "205" ||
+                ZdravotniPojistovnaKodValue == "207" ||
+                ZdravotniPojistovnaKodValue == "209" ||
+                ZdravotniPojistovnaKodValue == "211" ||
+                ZdravotniPojistovnaKodValue == "213"
             ) &&
-            (TestovanyJmenoElement.value && TestovanyPrijmeniElement.value && TestovanyDatumNarozeniElement.value) &&
-            TestovanyNarodnostElement && TestovanyNarodnostElement.value != "CZ" 
+            (
+                Jmeno && 
+                Prijmeni && 
+                DatumNarozeni
+            ) &&
+            Narodnost != "CZ" && Narodnost != "Česko"
         ) ||
         (
             Pacient_CisloPojistenceLabelElement && DetailPacientJmeno && DetailPacientPrijmeni && DetailDatumNarozeni
         )
     ) {
-        const CisloPojistence = DetailPacientCisloPojistence ? DetailPacientCisloPojistence : (TestovanyCisloPojistence ? TestovanyCisloPojistence.value : null)
         const VysledekNextElement = ZdravotniPojistovnaKodElement ? ZdravotniPojistovnaKodElement : Pacient_CisloPojistenceLabelElement.nextElementSibling;
-        const Jmeno = DetailPacientJmeno ? DetailPacientJmeno : (TestovanyJmenoElement ? TestovanyJmenoElement.value : null);
-        const Prijmeni = DetailPacientPrijmeni ? DetailPacientPrijmeni : (TestovanyPrijmeniElement ? TestovanyPrijmeniElement.value : null);
-        const DatumNarozeni = DetailDatumNarozeni ? DetailDatumNarozeni : (TestovanyDatumNarozeniElement ? getDateDDdotMMdotYYYY(TestovanyDatumNarozeniElement.value) : null);
 
         chrome.runtime.sendMessage({
             "text": "OvereniPlatnostiPojisteni",
@@ -145,8 +161,8 @@ function VysledekKontrolyZdravotniPojistovnaText() {
 
                     const ZdravotniPojistovnaVysledekKod = VysledekKontroly.zdravotniPojistovna.split("-")[0].trim();
 
-                    if(ZdravotniPojistovnaKodElement && ZdravotniPojistovnaVysledekKod != ZdravotniPojistovnaKodElement.value) {
-                        const ZdravotniPojistovnaKodText = ZdravotniPojistovnaKodElement.value ? ZdravotniPojistovnaKodElement.value : " ";
+                    if(ZdravotniPojistovnaKodElement && ZdravotniPojistovnaVysledekKod != ZdravotniPojistovnaKodValue) {
+                        const ZdravotniPojistovnaKodText = ZdravotniPojistovnaKodValue ? ZdravotniPojistovnaKodValue : " ";
                         alert("Neshoduje se kód pojišťovny na žádance: '" + ZdravotniPojistovnaKodText + "' a kód pojištovny dohledaného podle jména, příjmení a datumu narození: '" + ZdravotniPojistovnaVysledekKod + "'");
                     }
 
@@ -160,12 +176,14 @@ function VysledekKontrolyZdravotniPojistovnaText() {
                         "Číslo pojištěnce: " + VysledekKontroly.cisloPojistence + "<br>" +
                         "Druh pojištění: " + VysledekKontroly.druhPojisteni + "<br>" +
                         "Zdravotní pojišťovna: " + VysledekKontroly.zdravotniPojistovna + "<br>",
+                        true
                     );
                 } else {
 
                     VysledekElement = getVysledekKontrolyZdravotniPojistovnaTextElement(VysledekKontrolyZdravotniPojistovnaElementId,
                         "Jméno, příjmení a datum narození (" + Jmeno + ", " + Prijmeni + " a " + DatumNarozeni + "):" + "<br><br>" +
-                        "Výsledek ověření: " + VysledekKontroly.shrnuti + "<br>"
+                        "Výsledek ověření: " + VysledekKontroly.shrnuti + "<br>",
+                        true
                     );
                 }
 
@@ -174,7 +192,8 @@ function VysledekKontrolyZdravotniPojistovnaText() {
             } else {
                 VysledekElement = getVysledekKontrolyZdravotniPojistovnaTextElement(VysledekKontrolyZdravotniPojistovnaElementId,
                     "Jméno, příjmení a datum narození (" + Jmeno + ", " + Prijmeni + " a " + DatumNarozeni + "):" + "<br><br>" +
-                    "Nebylo možné ověřit. Problém na straně zprostředkovatele ověření nebo poskytovatele ověření VZP."
+                    "Nebylo možné ověřit. Problém na straně zprostředkovatele ověření nebo poskytovatele ověření VZP.",
+                    true
                 );
                 VysledekElement.setAttribute("id", VysledekKontrolyZdravotniPojistovnaElementId);
                 VysledekNextElement.parentNode.insertBefore(VysledekElement, VysledekNextElement.nextElementSibling);
@@ -188,4 +207,32 @@ function VysledekKontrolyZdravotniPojistovnaText() {
     }
 }
 
+var KodPojistovnyPrintDiv = null;
+var CisloPojistencePrintDiv = null;
+var JmenoPrintDiv = null;
+var PrijmeniPrintDiv = null;
+var DatumNarozeniPrintDiv = null;
+var NarodnostPrintDiv = null;
+
+const printDiv = document.getElementById("printDiv");
+
+if(printDiv && window.location.pathname == getRegistrCUDOvereniUrl()) {
+    const KodPojistovnyElement = document.evaluate('//td[contains(text(), "Zdravotní pojišťovna")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    KodPojistovnyPrintDiv = KodPojistovnyElement.singleNodeValue.nextSibling.nextSibling;
+    const CisloPojistenceElement = document.evaluate('//td[contains(text(), "Číslo pojištěnce")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    CisloPojistencePrintDiv = CisloPojistenceElement.singleNodeValue.nextSibling.nextSibling;
+    const JmenoElement = document.evaluate('//td[contains(text(), "Jméno")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    JmenoPrintDiv = JmenoElement.singleNodeValue.nextSibling.nextSibling;
+    const PrijmeniElement = document.evaluate('//td[contains(text(), "Příjmení")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    PrijmeniPrintDiv = PrijmeniElement.singleNodeValue.nextSibling.nextSibling;
+    const DatumNarozeniElement = document.evaluate('//td[contains(text(), "Datum narození")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    DatumNarozeniPrintDiv = DatumNarozeniElement.singleNodeValue.nextSibling.nextSibling;
+    const NarodnostElement = document.evaluate('//td[contains(text(), "Státní příslušnost")]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    NarodnostPrintDiv = NarodnostElement.singleNodeValue.nextSibling.nextSibling;
+}
+
 VysledekKontrolyZdravotniPojistovnaText();
+
+function getRegistrCUDOvereniUrl() {
+    return "/Registr/CUD/Overeni";
+}
